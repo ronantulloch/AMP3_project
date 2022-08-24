@@ -1,0 +1,46 @@
+
+R version 4.2.1 (2022-06-23 ucrt) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pacman::p_load(tidyverse, xesreadR)
+Installing package into 'C:/Users/Ronan/AppData/Local/R/win-library/4.2'
+(as 'lib' is unspecified)
+also installing the dependency 'XML'
+
+Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.2:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.2/PACKAGES'
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/4.2/XML_3.99-0.10.zip'
+Content type 'application/zip' length 3051962 bytes (2.9 MB)
+==================================================
+downloaded 2.9 MB
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/4.2/xesreadR_0.2.3.zip'
+Content type 'application/zip' length 50331 bytes (49 KB)
+==================================================
+downloaded 49 KB
+
+package 'XML' successfully unpacked and MD5 sums checked
+package 'xesreadR' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Ronan\AppData\Local\Temp\RtmpQRgguM\downloaded_packages
+
+xesreadR installed
+> data <- read_xes(xesfile = "bpi_challenge_2013_incidents.xes")
+Error: 'bpi_challenge_2013_incidents.xes' does not exist in current working directory ('C:/Users/Ronan/OneDrive - University of Adelaide/2022 Sem 2/Advanced Mathematical Perspectives- SMORG/Cumulative Code').
+Execution halted
