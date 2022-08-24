@@ -18,29 +18,53 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > pacman::p_load(tidyverse, xesreadR)
-Installing package into 'C:/Users/Ronan/AppData/Local/R/win-library/4.2'
-(as 'lib' is unspecified)
-also installing the dependency 'XML'
-
-Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.2:
-  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.2/PACKAGES'
-trying URL 'http://cran.rstudio.com/bin/windows/contrib/4.2/XML_3.99-0.10.zip'
-Content type 'application/zip' length 3051962 bytes (2.9 MB)
-==================================================
-downloaded 2.9 MB
-
-trying URL 'http://cran.rstudio.com/bin/windows/contrib/4.2/xesreadR_0.2.3.zip'
-Content type 'application/zip' length 50331 bytes (49 KB)
-==================================================
-downloaded 49 KB
-
-package 'XML' successfully unpacked and MD5 sums checked
-package 'xesreadR' successfully unpacked and MD5 sums checked
-
-The downloaded binary packages are in
-	C:\Users\Ronan\AppData\Local\Temp\RtmpQRgguM\downloaded_packages
-
-xesreadR installed
 > data <- read_xes(xesfile = "bpi_challenge_2013_incidents.xes")
-Error: 'bpi_challenge_2013_incidents.xes' does not exist in current working directory ('C:/Users/Ronan/OneDrive - University of Adelaide/2022 Sem 2/Advanced Mathematical Perspectives- SMORG/Cumulative Code').
-Execution halted
+Warning messages:
+1: `data_frame()` was deprecated in tibble 1.1.0.
+Please use `tibble()` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated. 
+2: `as_data_frame()` was deprecated in tibble 2.0.0.
+Please use `as_tibble()` instead.
+The signature and semantics have changed, see `?as_tibble`.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated. 
+3: In read_xes(xesfile = "bpi_challenge_2013_incidents.xes") :
+  No activity instance identifier specified in xes-file. By default considered each event as a different activity instance. Please check!
+> # turn into regular dataframe
+> data <- data.frame(data)
+> # narrow down to just data we are interested in
+> data <- subset(data, select = (names(data) %in% c("CASE_concept_name","activity_id")))
+> 
+> # Check unique symbols
+> unique(data$activity_id)
+[1] "Accepted"  "Queued"    "Completed" "Unmatched"
+> # Replace as follows:
+> # "Accepted"  = a
+> # "Queued"    = b
+> # "Completed" = c
+> # "Unmatched" = d
+> data$activity_id[data$activity_id == "Accepted"] <- "a"
+> data$activity_id[data$activity_id == "Queued"] <- "b"
+> data$activity_id[data$activity_id == "Completed"] <- "c"
+> data$activity_id[data$activity_id == "Unmatched"] <- "d"
+> 
+> # turn into list by splitting based on case
+> list_data <- split(data$activity_id, f = data$CASE_concept_name)
+> 
+> # Collapse into single strings
+> # paste(list_data$`1-364285768`, collapse = "")
+> for(i in 1:length(list_data)){
++   list_data[[i]] <- paste(list_data[[i]], collapse = "")
++ 
++ }
+> 
+> # Convert to array
+> array_data <- array(unlist(list_data))
+> 
+> # Save in nice format
+> write.csv(array_data, file = "tranformed_data.csv")
+> 
+> proc.time()
+   user  system elapsed 
+  31.37    1.10   32.59 

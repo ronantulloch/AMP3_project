@@ -1,9 +1,4 @@
 
-executed =
-
-     1
-
-
 Q = 
 
   2×5 <a href="matlab:helpPopup string" style="font-weight:bold">string</a> array
