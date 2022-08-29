@@ -1,39 +1,3 @@
-{Error: <a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\transform.m',11,4)">File: transform.m Line: 11 Column: 4</a>
-Invalid expression. Check for missing or extra characters.
-
-Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('driver', 'C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m', 22)" style="font-weight:bold">driver</a> (<a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m',22,0)">line 22</a>)
-[Q, Sigma, delta, q_0, F] = transform(Q, Sigma, delta, q_0, F); %Transform
-} 
-driver
-[Warning: File not found or permission denied] 
-[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('driver', 'C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m', 4)" style="font-weight:bold">driver</a> (<a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m',4,0)">line 4</a>)] 
-{Error: <a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\transform.m',11,4)">File: transform.m Line: 11 Column: 4</a>
-Invalid expression. Check for missing or extra characters.
-
-Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('driver', 'C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m', 22)" style="font-weight:bold">driver</a> (<a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m',22,0)">line 22</a>)
-[Q, Sigma, delta, q_0, F] = transform(Q, Sigma, delta, F); %Transform
-} 
-driver
-[Warning: File not found or permission denied] 
-[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('driver', 'C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m', 4)" style="font-weight:bold">driver</a> (<a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m',4,0)">line 4</a>)] 
-{Error: <a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\transform.m',11,4)">File: transform.m Line: 11 Column: 4</a>
-Invalid expression. Check for missing or extra characters.
-
-Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('driver', 'C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m', 20)" style="font-weight:bold">driver</a> (<a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m',20,0)">line 20</a>)
-[Q, Sigma, delta, q_0, F] = transform(Q, Sigma, delta, F); %Transform
-} 
-driver
-[Warning: File not found or permission denied] 
-[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('driver', 'C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m', 4)" style="font-weight:bold">driver</a> (<a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m',4,0)">line 4</a>)] 
-{Error: <a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\transform.m',11,4)">File: transform.m Line: 11 Column: 4</a>
-Invalid expression. Check for missing or extra characters.
-
-Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('driver', 'C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m', 20)" style="font-weight:bold">driver</a> (<a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m',20,0)">line 20</a>)
-[Q, Sigma, delta, q_0, F] = transform(Q, Sigma, delta, q_0, F); %Transform
-} 
-driver
-[Warning: File not found or permission denied] 
-[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('driver', 'C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m', 4)" style="font-weight:bold">driver</a> (<a href="matlab: opentoline('C:\Users\Ronan\Documents\GitHub\AMP3_Project_Code\driver.m',4,0)">line 4</a>)] 
 
 Q =
 

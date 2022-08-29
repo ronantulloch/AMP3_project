@@ -3,14 +3,17 @@ function [Q, Sigma, delta, q_0, F] = transform(Q, Sigma, delta, F)
 Q = double(Q(1,:)) + 1
 
 %Transform q_0
-q_0 = (double(delta(delta(:,2) == "", 4))') + 1
+q_0 = 1 %By definition
 
 %Transform F
 F = double(F(1,:)) + 1
 
 %Transform delta
 
+for i = 1:length(Q)
 
+
+end
 
 %Transform delta
 

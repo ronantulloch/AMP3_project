@@ -1,2 +1,3 @@
 # AMP3_Project_Code
- Cumulative code for AMP3 Statistics Group
+
+Aim to write MATLAB as functions with seperate driver files.

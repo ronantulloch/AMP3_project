@@ -16,6 +16,6 @@ Event_Log =  ["car", "cab", "dar", "dab"]; %Later turn this into READ CSV.
 %Get the transition matrix from the DFA.
 P = DFA_to_markov(delta, Event_Log);
 
-%Minimised the DFA
+%Minimise the DFA
 [Q, Sigma, delta, q_0, F] = transform(Q, Sigma, delta, F); %Transform 
 diary off
