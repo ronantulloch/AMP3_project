@@ -17,6 +17,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+[Previously saved workspace restored]
+
 > pacman::p_load(tidyverse, xesreadR)
 > data <- read_xes(xesfile = "bpi_challenge_2013_incidents.xes")
 Warning messages:
@@ -67,4 +69,4 @@ Call `lifecycle::last_lifecycle_warnings()` to see where this warning was genera
 > 
 > proc.time()
    user  system elapsed 
-  31.37    1.10   32.59 
+  32.57    1.09   33.92 
