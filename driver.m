@@ -1,21 +1,22 @@
-clc;
-%Get all output in a text file.
-dfile = 'output.txt';
-if exist(dfile, 'file') ; delete(dfile); end
-diary(dfile)
-diary on
+Event_Log_1 = ["card", "cab", "dar", "dab"];
+Event_Log_2 = ["carb", "cab", "dab", "dbc", "acb"];
 
-% %Clean the chosen file.
-% executed = system("R CMD BATCH manipulating.R"); %Try not to run too often as this script takes too long.
+%Get the DFAs from the event log.
 
-Event_Log =  ["car", "cab", "dar", "dab"]; %Later turn this into READ CSV.
+% M1
+M1 = DFA_construct(Event_Log_1);
+% M2
+M2 = DFA_construct(Event_Log_2);
 
-%Get the DFA from the event log.
-[Q, Sigma, delta, q_0, F] = DFA_construct(Event_Log);
+% M3 = M1 x M2
+M3 = cross_product(M1, M2);
 
-%Get the transition matrix from the DFA.
-P = DFA_to_markov(delta, Event_Log);
+% Minimize M3, call it M4
+M4 = minimize_DFA(M3)
 
-%Minimise the DFA
-[Q, Sigma, delta, q_0, F] = transform(Q, Sigma, delta, F); %Transform 
-diary off
+% have a look at the minimal delta of M1 x M2
+M4{3}
+
+% Look at the entropy of M4 (or rather the irreducible equivalent of M4)
+entropy(M4)
+

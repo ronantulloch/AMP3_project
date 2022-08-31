@@ -1,4 +1,4 @@
-function [Q, Sigma, delta, q_0, F] = DFA_construct(A)
+function [M] = DFA_construct(A)
 %%This function accepts a finite event log formatted as a string array and outputs the 5 elements 
 %%of a DFA. See read me for output formats.
 
@@ -40,18 +40,18 @@ prefixes = unique(prefixes);
 Q = unique([q_0, prefixes, F]); %Check in case a prefix is also a final state.
 
 %Number the states in Q with q_0 = 0 as reference and append to state space.
-state_names = string(num2cell(0:(length(Q)) - 1));
+state_names = string(num2cell(1:(length(Q))));
 Q = vertcat(state_names, Q);
 
 %Add the state number to the initial state.
-q_0 = [0; q_0];
+q_0 = [1; q_0];
 
 %Get state numbers of final states.
 for i = 1:length(F)
     for j = 1:length(Q)
         %Find which state number selected final state is.
         if F(i) == Q(2,j)
-            F_state(i) = j-1; %Account for reference state number = 0.
+            F_state(i) = j; %Account for reference state number = 0.
         end
     end
 end
@@ -94,4 +94,5 @@ for i = 1:length(Q)
     end
 end
 
+M = {Q, Sigma, delta, q_0, F};
 end
