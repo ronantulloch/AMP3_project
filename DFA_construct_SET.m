@@ -42,7 +42,7 @@ for i = 1:length(log)
 		delta_temp = delta(delta(:,5) == log(i),:);
 		beta = delta_temp;
 
-		final_element = char(beta(2));
+		final_element = char(beta(5));
 		final_element = final_element(end);
 
 		beta(3) = final_element;
