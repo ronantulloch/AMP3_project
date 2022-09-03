@@ -18,7 +18,7 @@ for i = 1:length(A)
 
 		else 
 			%Log the repeats in the event log.
-			log = horzcat(log, string(set_event));
+			log = horzcat(log, string([set_event, current_event(j)]));
         end
 	end
 	%Add the last digit and add to the version of the 
@@ -27,9 +27,9 @@ for i = 1:length(A)
 end
 
 %Remove empty string.
-log = log(log~="")
+log = unique(log(log~=""))
 
-%Make a prefix tree of the event DFA
+%Make a prefix tree of the event DFA with no repeats.
 M = DFA_construct(set_events);
 
 
@@ -38,20 +38,38 @@ delta = M{3};
 for i = 1:length(log)
 	delta_temp = delta(delta(:,2) == log(i),:);
 
-	for j = 1:size(delta_temp, 1)
+	if any(log(i) == set_events)
+		delta_temp = delta(delta(:,5) == log(i),:);
+		beta = delta_temp;
+
+		final_element = char(beta(2));
+		final_element = final_element(end);
+
+		beta(3) = final_element;
+		beta(1) = beta(4);
+		beta(2) = beta(5);
+
+		delta = [delta; beta];
+
+	else
+		for j = 1:size(delta_temp, 1)
 		%Grab final element
 		final_element = char(delta_temp(j,2));
 		final_element = final_element(end);
 
+		%Construct the cycle
 		beta = delta_temp(j,:);
 		beta(3) = final_element;
 		beta(5) = beta(2);
 		beta(4) = beta(1);
-
 		delta = [delta; beta];
 	end
+
+	end
+	
 end
 
 %Add the transition back in.
-M{3} = delta;
+M{3} = sortrows(unique(delta, 'rows'));
+
 end
