@@ -1,6 +1,9 @@
-function P = DFA_to_markov(delta, A)
+function P = DFA_to_markov(M A)
 %%This code takes a valid DFA and calculates a corresponding transition markov chain
 %%transition matrix. See read me for output format.
+
+%Grab transition matrix out of the 
+delta = M{3};
 
 %Initialise the transition matrix.
 P = zeros((size(delta,1) + 1));
