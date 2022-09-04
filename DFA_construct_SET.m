@@ -1,7 +1,7 @@
 function [M] = DFA_construct_SET(A)
 
 set_events = [];
-log = [];
+log = ["";""];
 
 %Check every event log
 for i = 1:length(A)
@@ -12,64 +12,35 @@ for i = 1:length(A)
     set_event = char([]);
 
     %Check for duplicate entries in the character array.
-    for j = 1:length(current_event) - 1
-        if current_event(j) ~= current_event(j+1)
+	for j = 1:length(current_event)
+		if ~any(contains(string(set_event), string(current_event(j))))
+			%Add the set of events.
             set_event = [set_event, current_event(j)];
 
-		else 
-			%Log the repeats in the event log.
-			log = horzcat(log, string([set_event, current_event(j)]));
-        end
+		else
+			log_current = [string(set_event); string(current_event(j))];
+			log = [log, log_current];
+		end
+		
 	end
-	%Add the last digit and add to the version of the 
-	set_event = [set_event, current_event(end)];
     set_events = [set_events, string(set_event)];
 end
 
 %Remove empty string.
-log = unique(log(log~=""))
+log = unique(log(:,2:end)', "rows");
 
 %Make a prefix tree of the event DFA with no repeats.
 M = DFA_construct(set_events);
-
-
-%Let's add the set transitions for the transition function
+Q = M{1};
 delta = M{3};
-for i = 1:length(log)
-	delta_temp = delta(delta(:,2) == log(i),:);
 
-	if any(log(i) == set_events)
-		delta_temp = delta(delta(:,5) == log(i),:);
-		beta = delta_temp;
+for i = 1:size(log,1)
+	state_no = Q(1, log(i) == Q(2,:));
 
-		final_element = char(beta(5));
-		final_element = final_element(end);
-
-		beta(3) = final_element;
-		beta(1) = beta(4);
-		beta(2) = beta(5);
-
-		delta = [delta; beta];
-
-	else
-		for j = 1:size(delta_temp, 1)
-		%Grab final element
-		final_element = char(delta_temp(j,2));
-		final_element = final_element(end);
-
-		%Construct the cycle
-		beta = delta_temp(j,:);
-		beta(3) = final_element;
-		beta(5) = beta(2);
-		beta(4) = beta(1);
-		delta = [delta; beta];
-	end
-
-	end
-	
+	new_delta = [state_no, log(i,1), log(i,2), state_no, log(i,1)];
+	delta = [delta; new_delta];
 end
 
-%Add the transition back in.
-M{3} = sortrows(unique(delta, 'rows'));
+M{3} = sortrows(delta);
 
 end
