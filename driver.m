@@ -1,5 +1,5 @@
 Event_Log_1 = ["card", "cab", "dar", "dab"];
-Event_Log_2 = ["carb", "cab", "dab", "dbc", "acb"];
+Event_Log_2 = ["card", "cab", "dab", "dbc", "acb"];
 
 %Get the DFAs from the event log.
 
@@ -16,7 +16,16 @@ M4 = minimize_DFA(M3)
 
 % have a look at the minimal delta of M1 x M2
 M4{3}
+% look at what each state represents
+states = state_list(M4)
 
-% Look at the entropy of M4 (or rather the irreducible equivalent of M4)
-entropy(M4)
+% Calculate precision & recall for M4
+precision(M4, Event_Log_1)
+recall(M4, Event_Log_1)
 
+precision(M4, Event_Log_2)
+recall(M4, Event_Log_2)
+
+% how about for the irreducible versions of M4 and L
+[p1,r1] = precall_irr(M4,Event_Log_1)
+[p2,r2] = precall_irr(M4,Event_Log_2)
