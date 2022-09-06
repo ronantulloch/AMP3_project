@@ -16,12 +16,10 @@ for i = 1:length(F)
     F_list = [F_list, Q_list{F(i)}];
 end
 
-MnL = intersect(L,F_list);
-M1 = DFA_construct(MnL); M1 = minimize_DFA(M1);
-M2 = DFA_construct(L); M2 = minimize_DFA(M2);
-M3 = DFA_construct(F_list); M3 = minimize_DFA(M3);
+ML = DFA_construct(L); ML = minimize_DFA(ML);
+MMnL = cross_product(M, ML);
 
-e1 = entropy(M1); e2 = entropy(M2); e3 = entropy(M3);
+e1 = entropy(MMnL); e2 = entropy(ML); e3 = entropy(M);
 
 p = e1/e3;
 r = e1/e2;
