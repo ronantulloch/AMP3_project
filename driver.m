@@ -20,11 +20,8 @@ M4{3}
 states = state_list(M4)
 
 % Calculate precision & recall for M4
-precision(M4, Event_Log_1)
-recall(M4, Event_Log_1)
-
-precision(M4, Event_Log_2)
-recall(M4, Event_Log_2)
+[p1,r1] = precall(M4,Event_Log_1)
+[p2,r2] = precall(M4,Event_Log_2)
 
 % how about for the irreducible versions of M4 and L
 [p1,r1] = precall_irr(M4,Event_Log_1)
