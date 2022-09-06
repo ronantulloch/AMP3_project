@@ -123,7 +123,7 @@ function [MM] = minimize_DFA(M)
         end      
     end      % will loop again if any new states created
 
-    Q_ = 1:length(pi); % redefine states to be consecutive number
+    Q_ = 1:length(pi); % redefine states to be consecutive numbers
 
     
     % Create new delta for new state set
@@ -150,7 +150,7 @@ function [MM] = minimize_DFA(M)
     for i = 1:length(pi)
         
         current_state_id = state_identity{i};
-        
+
         % test if state goes only to itself and is not a final state
         if ~any(current_state_id ~= current_state_id(1)) && ~any(ismember(F_, i))
                         
@@ -161,6 +161,12 @@ function [MM] = minimize_DFA(M)
             delta_(i,:) = []; %                      remove dead row i
             delta_ = delta_- i*ismember(delta_,i); % change i to 0 in delta
             pi(i) = [];
+            
+            % move anything that transitions past the dead state back one
+            [ind1,ind2] = find(delta_ > i); 
+            for k = 1:length(ind1)
+                delta_(ind1(k),ind2(k)) =  delta_(ind1(k),ind2(k))-1;
+            end
         end
     end
     
@@ -175,7 +181,7 @@ function [MM] = minimize_DFA(M)
         end
     end
     
-    disp("number of repeats: " + rpt)
+    %disp("number of repeats: " + rpt)
 
     MM = {Q_, sigma_, delta_, q_0_, F_};
 end
