@@ -77,6 +77,10 @@ for i = 1:length(event_log)
     % end of the current event log
     F = [F, double(index_current)];
 end
+
+% Remove empty first row of delta from initialisation
+delta = delta(2:end,:);
+
 % De-duplicate F
 F = unique(F);
 % Change Q and q_0 to just lists of state numbers rather than multisets
