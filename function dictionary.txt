@@ -55,4 +55,4 @@ precall_irr:
   I: DFA (cell array), Event Log (string array)
   O: Precision, Recall (numeric)
     Description: Calculates precision and recall by creating an irreducible variant and calculating topological entropy.
-    Dependencies: convert_simple, state_list, DFA_construct, minimize_DFA, entropy
+    Dependencies: convert_simple, state_list, DFA_construct, minimize_DFA, entropy, cross_product
