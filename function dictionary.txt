@@ -1,0 +1,58 @@
+DFA_construct:
+  I: Event log (string array)
+  O: prefix-tree DFA (cell array)
+    Description: Constructs a prefix-tree DFA from an event log.
+
+convert_simple:
+  I: DFA (cell array)
+  O: DFA (cell array)
+    Description: Converts the data types output by the DFA_construct function to that usable by other functions.
+
+state_list:
+  I: DFA (cell array)
+  O: List of state labels (cell array)
+    Description: Creates a list which defines the strings each DFA state represents.
+
+delta_to_transition:
+  I: DFA (cell array)
+  O: transition matrix (numeric array)
+    Description: Constructs the required transition matrix from the transition function delta.
+
+make_irreducible:
+  I: DFA (cell array)
+  O: DFA (cell array)
+    Description: Adds transition from all final states to initial state. Also adds a new letter for this transition
+
+
+
+
+minimize_DFA:
+  I: DFA (cell array)
+  O: DFA (cell array)
+    Description: minimizes a DFA.
+    Dependencies: convert_simple
+
+cross_product:
+  I: 2 DFAs (cell arrays)
+  O: prefix tree DFA (cell array)
+    Description: Constructs the cross product of two DFAs.
+    Dependencies: DFA_construct, state_list
+
+entropy:
+  I: DFA (cell array)
+  O: Entropy (numeric)
+    Description: Calculates topological entropy for a DFA by first making it irreducible if it is not already.
+    Dependencies: make_irreducible, delta_to_transition
+
+
+precall:
+  I: DFA (cell array), Event Log (string array)
+  O: Precision, Recall (numeric)
+    Description: Calculates precision and recall directly using set size proportions.
+    Dependencies: convert_simple, state_list
+
+precall_irr:
+  I: DFA (cell array), Event Log (string array)
+  O: Precision, Recall (numeric)
+    Description: Calculates precision and recall by creating an irreducible variant and calculating topological entropy.
+    Dependencies: convert_simple, state_list, DFA_construct, minimize_DFA, entropy
