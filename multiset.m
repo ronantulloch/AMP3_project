@@ -1,5 +1,5 @@
 % Function to construct DFAs using multiset prefixes
-function [Q, Sigma, delta, q_0, F] = multiset(event_log)
+function M = multiset(event_log)
 % will include the multisets of symbols in Q to compare; will remove at end
 
 % constructing the alphabet from event log
@@ -82,4 +82,7 @@ F = unique(F);
 % Change Q and q_0 to just lists of state numbers rather than multisets
 Q = 1:length(Q);
 q_0 = 1;
+
+%Output the model.
+M = {Q, Sigma, delta, q_0, F};
 end
