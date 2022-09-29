@@ -6,6 +6,7 @@ function [] = DFA_vis(M)
 delta = sortrows(M{3}, 2); %Sort rows for conformity.
 Q = M{1}; Q = sortrows(Q(2,:));
 F = M{5}; F = F(2,:);
+q_0 = M{4}; q_0 = q_0(2,1);
 final_index = [];
 G = digraph;
 
@@ -17,6 +18,8 @@ for i = 1:length(Q)
 	%Check if final state.
 	if any(Q(i) == F)
 		final_index = [final_index, i];
+	elseif Q(i) == q_0
+		initial_index = i;
 	end
 end
 
@@ -35,4 +38,5 @@ G.Edges
 h = plot(G,'Layout','layered',"EdgeFontAngle", "italic", "Marker", "o");
 h.EdgeLabel = G.Edges.names;
 highlight(h, final_index, "NodeColor","r"); %Highlight the final states.
+highlight(h, initial_index, "NodeColor","g"); %Highlight the initial state.
 end

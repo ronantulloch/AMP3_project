@@ -2,6 +2,7 @@ clc;
 %Load in the data.
 % A = readtable("CSV_Files/bpi_challenge_2013_incidents.csv");
 % A = string(table2cell(A)); A = A';
+% A = A(1:10);
 
 A = ["cab", "car", "dadb", "dar"];
 
@@ -15,4 +16,10 @@ k = 1;
 M_windowed = DFA_window_size(M, k);
 
 %Visualise the windowed DFA.
-DFA_vis(M_windowed)
+%DFA_vis(M_windowed)
+
+
+P = DFA_to_markov(M_windowed, A)
+
+
+
