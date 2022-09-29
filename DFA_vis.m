@@ -10,6 +10,7 @@ final_index = [];
 G = digraph;
 
 %Add the nodes to the graph
+Q = unique(Q);
 for i = 1:length(Q)
 	G = addnode(G, Q(i));
 	

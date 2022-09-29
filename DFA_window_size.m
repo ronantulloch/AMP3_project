@@ -19,7 +19,10 @@ for i = 1:size(delta, 1)
 end
 
 %Place the new delta back into the model.
-M{3} = unique(delta, 'rows');
+delta_temp = delta(:, [2,3,5]);
+[~, IA] = unique(delta_temp, 'rows');
+
+M{3} = delta(IA,:)
 
 %Truncate the states.
 Q = M{1};
@@ -37,6 +40,8 @@ for i = 1:size(F,2)
 	end
 end
 
+%Place back into the model
 M{1} = Q;
 M{5} = F;
+
 end
