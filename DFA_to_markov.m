@@ -19,7 +19,7 @@ for i = 1:size(delta, 1)
 
 	%Initialise the counts of the old and new transitions.
 	prefix = delta(i,2);
-	transition = strcat(delta(i,2), delta(i,3))
+	transition = strcat(delta(i,2), delta(i,3));
 
 	%Get the counts of each prefix and transition in each event.
 	pre_count = 0;
@@ -53,6 +53,7 @@ for i = 1:size(delta, 1)
 	end
 end
 
+%Fix the transitions.
 for i = 1:(size(P,1) - 1)
 	if sum(P(i,:)) ~= 1
 		P(i,end) = 1 - sum(P(i,:));

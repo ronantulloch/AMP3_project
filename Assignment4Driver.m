@@ -1,13 +1,13 @@
 clc;
 %Load in the data.
-% A = readtable("CSV_Files/bpi_challenge_2013_incidents.csv");
-% A = string(table2cell(A)); A = A';
-% A = A(1:10);
+A = readtable("CSV_Files/bpi_challenge_2013_incidents.csv");
+A = string(table2cell(A)); A = A';
+A = A(1:100);
 
-A = ["cab", "car", "dadb", "dar"];
+% A = ["cab", "car", "dadb", "dar"];
 
 %Construct the sequence based DFA
-M = DFA_construct(A);
+M = DFA_construct_SET(A);
 
 %Set the k window.
 k = 1;
@@ -16,10 +16,7 @@ k = 1;
 M_windowed = DFA_window_size(M, k);
 
 %Visualise the windowed DFA.
-%DFA_vis(M_windowed)
+DFA_vis(M_windowed)
 
-
-P = DFA_to_markov(M_windowed, A)
-
-
-
+%Get the irreducible markov distribution.
+P = DFA_to_markov(M_windowed, A);

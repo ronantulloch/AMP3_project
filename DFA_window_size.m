@@ -81,6 +81,8 @@ end
 %Remove duplicates
 Q = unique(Q', 'rows'); Q = Q';
 F = unique(F', 'rows'); F = F';
+[~, IA] = unique(delta(:,[2,3,5]),"rows");
+delta = delta(IA,:);
 delta = unique(delta, "rows");
 
 %Place back into the model
