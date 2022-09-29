@@ -14,10 +14,29 @@ for i = 1:size(delta, 1)
 		new_first_state = string(first_state((end-k+1):end));
 		new_second_state = string(second_state((end-k+1):end));
 		delta(i,2) = new_first_state;
-		delta(i,5) = new_second_state
+		delta(i,5) = new_second_state;
 	end
 end
 
 %Place the new delta back into the model.
 M{3} = unique(delta, 'rows');
+
+%Truncate the states.
+Q = M{1};
+for i = 1:size(Q,2)
+	current_element = char(Q(2,i));
+	if length(current_element) > k
+		Q(2,i) = string(current_element(end-k+1:end));
+	end
+end
+F = M{5};
+for i = 1:size(F,2)
+	current_element = char(F(2,i));
+	if length(current_element) > k
+		F(2,i) = string(current_element(end-k+1:end));
+	end
+end
+
+M{1} = Q;
+M{5} = F;
 end

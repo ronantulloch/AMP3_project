@@ -49,5 +49,5 @@ for i = 1:size(log,1)
 end
 
 %Place the transition function back into the model.
-M{3} = sortrows(delta);
+M{3} = sortrows(delta,1)
 end

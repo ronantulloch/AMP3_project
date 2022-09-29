@@ -1,8 +1,8 @@
 # Load necessary packages
-pacman::p_load(xesreadR, tidyverse)
+pacman::p_load(xesreadR, tidyverse, stringr)
 
 # Import the data - may take many seconds, probably less than a minute
-data <- read_xes(xesfile = "bpi_challenge_2013_incidents.xes")
+data <- read_xes(xesfile = "XES_Files/bpi_challenge_2013_incidents.xes")
 
 # Turn into regular dataframe
 data <- data.frame(data)
@@ -15,15 +15,15 @@ data <- subset(data, select = (names(data) %in% c("CASE_concept_name","activity_
 
 # Replace as follows:
 # "Accepted"  = a
-# "Queued"    = b
+# "Queued"    = q
 # "Completed" = c
-# "Unmatched" = d
+# "Unmatched" = u
 
 # Recode data
 data$activity_id[data$activity_id == "Accepted"] <- "a"
-data$activity_id[data$activity_id == "Queued"] <- "b"
+data$activity_id[data$activity_id == "Queued"] <- "q"
 data$activity_id[data$activity_id == "Completed"] <- "c"
-data$activity_id[data$activity_id == "Unmatched"] <- "d"
+data$activity_id[data$activity_id == "Unmatched"] <- "u"
 
 # turn into list by splitting based on case
 list_data <- split(data$activity_id, f = data$CASE_concept_name)
@@ -40,5 +40,10 @@ array_data <- array(unlist(list_data))
 # Convert to data frame
 array_data <- data.frame(array_data)
 
+# #Add quotations for MATLAB integration.
+# array_data$array_data <- paste('"', array_data$array_data, '"')
+
 # load required package and then save data in nice format
-write_delim(array_data, "transformed_data", delim = ",", col_names = FALSE)
+write_delim(array_data, "CSV_Files/bpi_challenge_2013_incidents.csv", 
+            delim = ",", col_names = FALSE)
+

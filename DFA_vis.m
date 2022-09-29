@@ -3,8 +3,8 @@ function [] = DFA_vis(M)
 %%visualisation of the graph that relates the states.
 
 %Grab the transition function and states and initialise the graph.
-delta = M{3};
-Q = M{1}; Q = Q(2,:);
+delta = sortrows(M{3}, 2); %Sort rows for conformity.
+Q = M{1}; Q = sortrows(Q(2,:));
 F = M{5}; F = F(2,:);
 final_index = [];
 G = digraph;
@@ -27,10 +27,11 @@ end
 
 %Add the names to the transitions
 G.Edges.names = delta(:,3);
+G.Edges
 
 
 %Plot the graph
-h = plot(G,'Layout','force', "Marker", "o");
+h = plot(G,'Layout','layered',"EdgeFontAngle", "italic", "Marker", "o");
 h.EdgeLabel = G.Edges.names;
-highlight(h, final_index); %Highlight the final states.
+highlight(h, final_index, "NodeColor","r"); %Highlight the final states.
 end

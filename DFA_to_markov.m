@@ -1,4 +1,4 @@
-function P = DFA_to_markov(M A)
+function P = DFA_to_markov(M, A)
 %%This code takes a valid DFA and calculates a corresponding transition markov chain
 %%transition matrix. See read me for output format.
 
