@@ -3,7 +3,7 @@ function [] = DFA_vis(M)
 %%visualisation of the graph that relates the states.
 
 %Grab the transition function and states and initialise the graph.
-delta = sortrows(M{3}, [2,5]) %Sort rows for conformity.
+delta = sortrows(M{3}, [2,5]); %Sort rows for conformity.
 Q = M{1}; Q = sortrows(Q(2,:));
 F = M{5}; F = F(2,:);
 q_0 = M{4}; q_0 = q_0(2,1);

@@ -34,67 +34,33 @@ for i = 1:size(F,2)
 	end
 end
 
-%Merge entries in the Q, F and delta functions.
+%Remove and number the duplicate Q values.
+Q = sortrows(unique(Q(2,:)'))';
+Q(2,:) = Q(1,:);
+Q(1,:) = string(1:size(Q,2));
+
+
 for i = 1:size(Q,2)
-	%Select the current state.
-	indexes = [];
 	current_Q = Q(2,i);
 
-	%Replace all of the indexes.
-	for j=1:size(Q,2)
-		if current_Q == Q(2,j)
-			indexes = [indexes, Q(1,j)];
+	for j = 1:size(F,2)
+		if current_Q == F(2,j)
+			F(1,j) = Q(1,i);
 		end
 	end
 
-	%Get the minimum state.
-	min_state = string(min(double(indexes)));
-	indexes = indexes(indexes~=min_state);
-
-	%Replace the final states.
-	for k = 1:size(F,2)
-		if any(F(1,k)==indexes)
-			F(1,k) = min_state;
+	for j = 1:size(delta,1)
+		if current_Q == delta(j,2)
+			delta(j,1) = Q(1,i);
+		end
+		if current_Q == delta(j,5)
+			delta(j,4) = Q(1,i);
 		end
 	end
 
-	%Replace the total states.
-	for k = 1:size(Q,2)
-		if any(Q(1,k)==indexes)
-			Q(1,k) = min_state;
-		end
-	end
-
-	%Replace the deltas
-	for k = 1:size(delta,1)
-		if any(delta(k,1)==indexes)
-			delta(k,1) = min_state;
-		end
-	end
-	for k = 1:size(delta,1)
-		if any(delta(k,4)==indexes)
-			delta(k,4) = min_state;
-		end
-	end
 end
 
-%Remove duplicates
-Q = unique(Q', 'rows'); Q = Q';
-F = unique(F', 'rows'); F = F';
-[~, IA] = unique(delta(:,[2,3,5]),"rows");
-delta = delta(IA,:);
-delta = unique(delta, "rows");
-
-%Remove the meaningless transitions.
-dim = size(delta,1);
-for j = 1:dim
-	for i = 1:size(delta,1)
-		if ~contains(delta(i,5), delta(i,3))
-			delta(i,:) = [];
-			break
-		end
-	end
-end
+delta = unique(delta, "rows")
 
 
 %Place back into the model
