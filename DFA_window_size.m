@@ -1,4 +1,4 @@
-function M = DFA_window_size(M, k)
+function M = DFA_window_size(M, k, isMulti)
 %This function transforms the states of a DFA to be given a set window size.
 
 %Grab the transition array.
@@ -31,6 +31,27 @@ for i = 1:size(F,2)
 	current_element = char(F(2,i));
 	if length(current_element) > k
 		F(2,i) = string(current_element(end-k+1:end));
+	end
+end
+
+
+if isMulti == 1
+	A = M{6};
+	for i = 1:length(A)
+		current_A = char(A(i));
+			if length(current_A) > k
+				A(i) = string(current_A(end-k+1:end));
+			end
+	end
+	F = unique(A);
+	F(2,:) = F(1,:);
+
+	for i = 1:size(Q,2)
+		for j = 1:size(F,2)
+			if Q(2,i) == F(2,j)
+				F(1,j) = Q(1,i)
+			end
+		end
 	end
 end
 
@@ -70,7 +91,7 @@ for j = 1:dim
 	end
 end
 
-delta = unique(delta, "rows")
+delta = unique(delta, "rows");
 
 %Place back into the model
 M{1} = Q;

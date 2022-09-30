@@ -16,12 +16,12 @@ M_2 = DFA_construct_MULTI(A);
 M_3 = DFA_construct_SET(A);
 
 %Set the k window.
-k = 2;
+k = 3;
 
 %Get the windowed DFAs
-M_1w = DFA_window_size(M_1, k);
-M_2w = DFA_window_size(M_2, k);
-M_3w = DFA_window_size(M_3, k)
+M_1w = DFA_window_size(M_1, k, 0);
+M_2w = DFA_window_size(M_2, k, 1);
+M_3w = DFA_window_size(M_3, k, 0);
 
 %Visualise the windowed DFA.
 % DFA_vis(M_1)
@@ -29,7 +29,7 @@ M_3w = DFA_window_size(M_3, k)
 % DFA_vis(M_3)
 % DFA_vis(M_1w)
 % DFA_vis(M_2w)
-% DFA_vis(M_3w)
+DFA_vis(M_3w)
 
 % %Get the irreducible markov distribution.
-% P = DFA_to_markov(M_windowed, A);
+P = DFA_to_markov(M_2w, A)

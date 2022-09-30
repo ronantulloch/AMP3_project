@@ -30,4 +30,5 @@ F = (unique(F',"rows"))';
 M{3} = sortrows(delta,1);
 M{1} = Q;
 M{5} = F;
+M{6} = A;
 end

@@ -31,8 +31,6 @@ end
 
 %Add the names to the transitions
 G.Edges.names = delta(:,3);
-G.Edges
-
 
 %Plot the graph
 h = plot(G,'Layout','layered',"EdgeFontAngle", "italic", "Marker", "o");
