@@ -57,11 +57,20 @@ for i = 1:size(Q,2)
 			delta(j,4) = Q(1,i);
 		end
 	end
+end
 
+%Remove the meaningless transitions.
+dim = size(delta,1);
+for j = 1:dim
+	for i = 1:size(delta,1)
+		if ~contains(delta(i,5), delta(i,3))
+			delta(i,:) = [];
+			break
+		end
+	end
 end
 
 delta = unique(delta, "rows")
-
 
 %Place back into the model
 M{1} = Q;
