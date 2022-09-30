@@ -71,7 +71,7 @@ for i = 1:size(Q,2)
 			delta(k,1) = min_state;
 		end
 	end
-		for k = 1:size(delta,1)
+	for k = 1:size(delta,1)
 		if any(delta(k,4)==indexes)
 			delta(k,4) = min_state;
 		end
@@ -84,6 +84,18 @@ F = unique(F', 'rows'); F = F';
 [~, IA] = unique(delta(:,[2,3,5]),"rows");
 delta = delta(IA,:);
 delta = unique(delta, "rows");
+
+%Remove the meaningless transitions.
+dim = size(delta,1);
+for j = 1:dim
+	for i = 1:size(delta,1)
+		if ~contains(delta(i,5), delta(i,3))
+			delta(i,:) = [];
+			break
+		end
+	end
+end
+
 
 %Place back into the model
 M{1} = Q;
