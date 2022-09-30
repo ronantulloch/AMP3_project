@@ -63,9 +63,11 @@ for i = 1:size(F,2)
 	F(2,i) = string(sort(char(F(2,i))));
 end
 
-
+%Remove duplicates and place back into the model.
 [~, IA] = unique(delta(:,[2,3,5]),"rows");
 delta = delta(IA,:);
+Q = (unique(Q',"rows"))';
+F = (unique(F',"rows"))';
 M{3} = sortrows(delta,1);
 M{1} = Q;
 M{5} = F;

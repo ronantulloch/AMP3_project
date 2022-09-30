@@ -33,7 +33,6 @@ end
 G.Edges.names = delta(:,3);
 G.Edges
 
-
 %Plot the graph
 h = plot(G,'Layout','layered',"EdgeFontAngle", "italic", "Marker", "o");
 h.EdgeLabel = G.Edges.names;
