@@ -7,28 +7,34 @@ Q = M{1};
 delta = M{3};
 F = M{5};
 
-%Place the transition function back into the model.
-for i = 1:size(delta,1)
-	delta(i,2) = string(sort(char(delta(i,2))));
-	delta(i,5) = string(sort(char(delta(i,5))));
-end
-
 for i = 1:size(Q,2)
-	Q(2,i) = string(sort(char(Q(2,i))));
+	current_Q = Q(i);
+
+	for j = 1:size(Q,2)
+		if string(sort(char(current_Q))) == string(sort(char(Q(j))))
+			Q(1,j) = Q(1,i);
+		end
+	end
+
+
+	for j = 1:size(F,2)
+		if Q(2,i) == F(2,j)
+			F(1,j) = Q(1,i);
+		end
+	end
+
+	for j = 1:size(delta,1)
+		if delta(j,2) == Q(2,i)
+			delta(j,1) = Q(1,i);
+		end
+		if delta(j,5) == Q(2,i)
+			delta(j,4) = Q(1,i);
+		end
+	end
 end
 
-for i = 1:size(F,2)
-	F(2,i) = string(sort(char(F(2,i))));
-end
+delta = unique(delta, "rows", "stable");
 
 
-%Remove duplicates and place back into the model.
-[~, IA] = unique(delta(:,[2,3,5]),"rows");
-delta = delta(IA,:);
-Q = (unique(Q',"rows"))';
-F = (unique(F',"rows"))';
-M{3} = sortrows(delta,1);
-M{1} = Q;
-M{5} = F;
 M{6} = A;
 end

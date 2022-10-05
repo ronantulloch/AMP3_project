@@ -1,5 +1,6 @@
 function M = DFA_window_size(M, k, isMulti)
 %This function transforms the states of a DFA to be given a set window size.
+%CURRENTLY ONLY WOKS FOR SEQUENCE BASED DFAs. 
 
 %Grab the transition array.
 delta = M{3};
@@ -39,9 +40,9 @@ if isMulti == 1
 	A = M{6};
 	for i = 1:length(A)
 		current_A = char(A(i));
-			if length(current_A) > k
-				A(i) = string(current_A(end-k+1:end));
-			end
+		if length(current_A) > k
+			A(i) = string(current_A(end-k+1:end));
+		end
 	end
 	F = unique(A);
 	F(2,:) = F(1,:);
@@ -49,17 +50,17 @@ if isMulti == 1
 	for i = 1:size(Q,2)
 		for j = 1:size(F,2)
 			if Q(2,i) == F(2,j)
-				F(1,j) = Q(1,i)
+				F(1,j) = Q(1,i);
 			end
 		end
 	end
+
 end
 
 %Remove and number the duplicate Q values.
 Q = sortrows(unique(Q(2,:)'))';
 Q(2,:) = Q(1,:);
 Q(1,:) = string(1:size(Q,2));
-
 
 for i = 1:size(Q,2)
 	current_Q = Q(2,i);
@@ -80,18 +81,19 @@ for i = 1:size(Q,2)
 	end
 end
 
-%Remove the meaningless transitions.
+
+% %Remove the meaningless transitions.
 dim = size(delta,1);
 for j = 1:dim
 	for i = 1:size(delta,1)
-		if ~contains(delta(i,5), delta(i,3))
+		if (~contains(delta(i,5), delta(i,3))) && strlength(delta(i,5)) > 1
 			delta(i,:) = [];
 			break
 		end
 	end
 end
+delta = unique(delta, "rows", "stable");
 
-delta = unique(delta, "rows");
 
 %Place back into the model
 M{1} = Q;
