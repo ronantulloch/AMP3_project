@@ -2,6 +2,7 @@
 FUNCTION TO CALCULATE PRECISION AND RECALL OF DFA
 Input: DFA, event log
 Output: (precision, recall)
+- ACTUALLY: recall only works for recall=1 models
 """
 
 import dfa_construct_all_functions as dfa_construct
