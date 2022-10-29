@@ -263,7 +263,10 @@ def sequences_windowed(L,k):
         # Loop across length of trace - to get all possible prefixes
         for i in range(1,len(trace)+1):
             # Get current prefix 
-            current_prefix = trace[i-k:i]
+            if i >= k:
+                current_prefix = trace[i-k:i]
+            else:
+                current_prefix = trace[0:i]
             #print(current_prefix)
         
             # Check whether it is in the list of prefixes already

@@ -124,4 +124,34 @@ def dfa_to_markov(dfa,L,times):
     #print("")
     #print(P)
     
+    # Turn lists of times into probability distributions
+    for i in range(0,len(f_wait)):
+        # Extract name
+        name = f_wait[i][0]
+        
+        # Extract times
+        f_times = f_wait[i][1]
+        
+        # Get unique times
+        f_unique_times = list(np.unique(np.array(f_times)))
+        
+        # (Re-)Initialise lists of time counts and probabilities
+        f_times_counts = list()
+        f_times_probs = list()
+        
+        # Count occurrances of times, add to list
+        for j in range(0,len(f_unique_times)):
+            obs_count = f_times.count(f_unique_times[j])
+            f_times_counts.append(obs_count)
+            obs_prob = obs_count/len(f_times)
+            f_times_probs.append(obs_prob)
+            
+        # Check that there are the same number of times as counts and probabilities of times
+        if len(f_unique_times) != len(f_times_counts) != len(f_times_probs):
+            raise ValueError("MAJOR ERROR: Probability distribution columns of different size")
+            
+        # Save back into list for probability distributions
+        prob_dist = (name, f_unique_times, f_times_probs, f_times_counts)
+        f_wait[i] = prob_dist
+
     return (P,f_wait)
