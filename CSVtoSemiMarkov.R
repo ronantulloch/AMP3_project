@@ -1,4 +1,11 @@
+#' ---
+#' title: "Semi-Markov Process Construction"
+#' format: "pdf_document"
+#' ---
+
 ## This script takes a Disco derived CSV output and generates a semi-markov process
+## along with mean wait times and limiting probabilities for each state. It also finds
+## the mean hitting time for state e.
 
 #Load the packages
 pacman::p_load(
@@ -6,8 +13,11 @@ pacman::p_load(
   lubridate
 )
 
+#Define the file of interest
+file <- "CSV_Files/BPI_Challenge_2013_closed_problems.csv"
+
 #Read in the data
-data <- read.csv("CSV_Files/BPI_Challenge_2013_closed_problems.csv") |>
+data <- read.csv(file) |>
   mutate(
     across(!where(is.factor),as_factor),
     Complete.Timestamp = as.character(Complete.Timestamp)
@@ -70,7 +80,8 @@ for(i in 1:length(unique_cases)){
   }
 
   #Get the initial state counts
-  initial_state_counts[temp_data$state_id[1]] = initial_state_counts[temp_data$state_id[1]] + 1
+  initial_state_counts[temp_data$state_id[1]] <- 
+    initial_state_counts[temp_data$state_id[1]] + 1
 }
 
 #Get the initial state transition probabilities

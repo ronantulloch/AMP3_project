@@ -35,6 +35,9 @@ end
 
 delta = unique(delta, "rows", "stable");
 
+M{1} = Q
+M{3} = delta
+M{5} = F
 
 M{6} = A;
 end
